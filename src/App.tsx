@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
+import { DashboardTab } from './components/dashboard/DashboardTab';
 import { OrdersTab } from './components/orders/OrdersTab';
 import { MenuTab } from './components/menu/MenuTab';
 import { VouchersTab } from './components/vouchers/VouchersTab';
@@ -212,11 +213,11 @@ export function App() {
     { id: 'v3', code: 'MAHARAJA', desc: '15% OFF on Maharaja Special Thali', minOrder: 500, discountType: 'percentage', discountValue: 15, valid: 'Active' },
   ]);
 
-  const [newDish, setNewDish] = useState({ 
-    name: '', 
-    category: 'Thalis', 
-    price: 250, 
-    isVeg: true, 
+  const [newDish, setNewDish] = useState({
+    name: '',
+    category: 'Thalis',
+    price: 250,
+    isVeg: true,
     rating: 4.8,
     prepTimeMinutes: 15,
     description: '',
@@ -330,9 +331,11 @@ export function App() {
         {/* BODY CANVAS */}
         <div className="p-3 pt-0 sm:p-4 sm:pt-0 overflow-y-auto flex-1 space-y-3 sm:space-y-4">
           {activeTab === 'dashboard' && (
-            <div className="flex items-center justify-center min-h-[400px] text-slate-600 font-medium text-base bg-white rounded-xl shadow-xs border border-slate-200/80 p-8">
-              Working
-            </div>
+            <DashboardTab
+              orders={orders}
+              onNavigateOrders={() => setActiveTab('orders')}
+              onOpenDetails={(ord) => setSelectedOrderPopup(ord)}
+            />
           )}
 
           {activeTab === 'orders' && (

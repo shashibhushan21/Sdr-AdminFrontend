@@ -4,6 +4,7 @@ import {
   ShoppingBag,
   UtensilsCrossed,
   Ticket,
+  Users,
   X
 } from 'lucide-react';
 
@@ -32,6 +33,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     },
     { id: 'menu', label: 'Menu & Inventory', icon: UtensilsCrossed },
     { id: 'vouchers', label: 'Vouchers & Offers', icon: Ticket },
+    { id: 'users', label: 'Customers', icon: Users },
   ];
 
   return (
@@ -41,9 +43,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div>
           {/* Brand Header */}
           <div className="p-4 flex items-center gap-3 mb-2">
-            <img 
-              src="/logo.jpg" 
-              alt="Shripati Dwarkadhish Logo" 
+            <img
+              src="/logo.jpg"
+              alt="Shripati Dwarkadhish Logo"
               className="w-11 h-11 object-contain rounded-full bg-white shadow-xs shrink-0"
             />
             <div className="min-w-0">
@@ -93,15 +95,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <div>
               <div className="flex items-center justify-between pb-4">
                 <div className="flex items-center gap-2.5">
-                  <img 
-                    src="/logo.jpg" 
-                    alt="Shripati Dwarkadhish Logo" 
+                  <img
+                    src="/logo.jpg"
+                    alt="Shripati Dwarkadhish Logo"
                     className="w-9 h-9 object-contain rounded-full bg-white shadow-xs"
                   />
                   <span className="font-bold text-sm text-slate-900">SDR Admin</span>
                 </div>
-                <button 
-                  onClick={() => setMobileMenuOpen(false)} 
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-slate-400 hover:text-slate-700 bg-white p-1.5 rounded-md transition cursor-pointer shadow-xs"
                 >
                   <X size={18} />
@@ -144,5 +146,3 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </>
   );
 };
-
-
