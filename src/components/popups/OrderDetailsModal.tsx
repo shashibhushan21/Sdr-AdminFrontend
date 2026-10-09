@@ -65,12 +65,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
             </div>
           </div>
 
-          {order.specialInstructions && (
-            <div className="p-3 bg-amber-50 rounded-lg text-amber-900 text-xs">
-              <span className="font-bold block">Special Cooking / Packing Instructions:</span>
-              <p className="mt-0.5 font-medium">{order.specialInstructions}</p>
-            </div>
-          )}
+
 
           {/* Complete Itemized Dishes List */}
           <div className="space-y-2">
