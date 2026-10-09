@@ -7,6 +7,8 @@ import { VouchersTab } from './components/vouchers/VouchersTab';
 import { OrderDetailsModal } from './components/popups/OrderDetailsModal';
 import { AddDishModal } from './components/popups/AddDishModal';
 import { EditDishModal } from './components/popups/EditDishModal';
+import { ViewDishModal } from './components/popups/ViewDishModal';
+import { ConfirmDeleteModal } from './components/popups/ConfirmDeleteModal';
 import { AddVoucherModal } from './components/popups/AddVoucherModal';
 import type { Order, MenuItem, Voucher, OrderStatus } from './types/admin';
 
@@ -201,6 +203,8 @@ export function App() {
   const [selectedOrderPopup, setSelectedOrderPopup] = useState<Order | null>(null);
   const [showAddDishModal, setShowAddDishModal] = useState(false);
   const [editingDish, setEditingDish] = useState<MenuItem | null>(null);
+  const [viewingDish, setViewingDish] = useState<MenuItem | null>(null);
+  const [dishToDelete, setDishToDelete] = useState<MenuItem | null>(null);
   const [showAddVoucherModal, setShowAddVoucherModal] = useState(false);
   const [vouchers, setVouchers] = useState<Voucher[]>([
     { id: 'v1', code: 'TRAIN10', desc: '10% OFF on all Thali orders', minOrder: 300, discountType: 'percentage', discountValue: 10, valid: 'Active', badgeText: 'Popular' },
@@ -213,6 +217,7 @@ export function App() {
     category: 'Thalis', 
     price: 250, 
     isVeg: true, 
+    rating: 4.8,
     prepTimeMinutes: 15,
     description: '',
     image: '/veg/veg_thali.jpg'
@@ -256,14 +261,14 @@ export function App() {
       isVeg: newDish.isVeg,
       isAvailable: true,
       ordersCount: 0,
-      rating: 5.0,
+      rating: Number(newDish.rating) || 4.8,
       prepTimeMinutes: Number(newDish.prepTimeMinutes) || 15,
       description: newDish.description || `${newDish.name} prepared freshly at Agra Cantt kitchen`,
       image: newDish.image || '/veg/veg_thali.jpg',
     };
     setMenuItems((prev) => [dishToAdd, ...prev]);
     setShowAddDishModal(false);
-    setNewDish({ name: '', category: 'Thalis', price: 250, isVeg: true, prepTimeMinutes: 15, description: '', image: '/veg/veg_thali.jpg' });
+    setNewDish({ name: '', category: 'Thalis', price: 250, isVeg: true, rating: 4.8, prepTimeMinutes: 15, description: '', image: '/veg/veg_thali.jpg' });
   };
 
   const handleEditDish = (e: React.FormEvent) => {
@@ -348,7 +353,11 @@ export function App() {
               onToggleAvailability={toggleMenuAvailability}
               onOpenAddModal={() => setShowAddDishModal(true)}
               onOpenEditModal={(dish) => setEditingDish(dish)}
-              onDeleteDish={handleDeleteDish}
+              onDeleteDish={(id) => {
+                const dish = menuItems.find((m) => m.id === id);
+                if (dish) setDishToDelete(dish);
+              }}
+              onViewDish={(dish) => setViewingDish(dish)}
             />
           )}
 
@@ -385,7 +394,30 @@ export function App() {
           setEditingDish={setEditingDish}
           onClose={() => setEditingDish(null)}
           onSubmit={handleEditDish}
-          onDelete={handleDeleteDish}
+          onDelete={(id) => {
+            const dish = menuItems.find((m) => m.id === id);
+            if (dish) {
+              setEditingDish(null);
+              setDishToDelete(dish);
+            }
+          }}
+        />
+      )}
+
+      {viewingDish && (
+        <ViewDishModal
+          dish={viewingDish}
+          onClose={() => setViewingDish(null)}
+          onEdit={(dish) => setEditingDish(dish)}
+          onToggleAvailability={toggleMenuAvailability}
+        />
+      )}
+
+      {dishToDelete && (
+        <ConfirmDeleteModal
+          dish={dishToDelete}
+          onClose={() => setDishToDelete(null)}
+          onConfirm={handleDeleteDish}
         />
       )}
 

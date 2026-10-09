@@ -58,14 +58,14 @@ export const EditDishModal: React.FC<EditDishModalProps> = ({
             />
           </div>
 
-          {/* Category & Price & Prep Time */}
-          <div className="grid grid-cols-3 gap-3">
+          {/* Category & Price & Rating & Prep Time */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
               <label className="admin-label block mb-1">Category</label>
               <select
                 value={editingDish.category}
                 onChange={(e) => setEditingDish({ ...editingDish, category: e.target.value })}
-                className="admin-input w-full cursor-pointer"
+                className="admin-input w-full cursor-pointer text-xs"
               >
                 <option value="Thalis">Thalis</option>
                 <option value="Combos">Combos</option>
@@ -84,18 +84,32 @@ export const EditDishModal: React.FC<EditDishModalProps> = ({
                 required
                 value={editingDish.price}
                 onChange={(e) => setEditingDish({ ...editingDish, price: Number(e.target.value) })}
-                className="admin-input w-full font-bold"
+                className="admin-input w-full font-bold text-xs"
               />
             </div>
 
             <div>
-              <label className="admin-label block mb-1">Prep Time (Mins)</label>
+              <label className="admin-label block mb-1">Rating (★)</label>
+              <input
+                type="number"
+                step="0.1"
+                min="1.0"
+                max="5.0"
+                required
+                value={editingDish.rating || 4.5}
+                onChange={(e) => setEditingDish({ ...editingDish, rating: Number(e.target.value) })}
+                className="admin-input w-full font-bold text-xs"
+              />
+            </div>
+
+            <div>
+              <label className="admin-label block mb-1">Prep (Mins)</label>
               <input
                 type="number"
                 required
                 value={editingDish.prepTimeMinutes || 15}
                 onChange={(e) => setEditingDish({ ...editingDish, prepTimeMinutes: Number(e.target.value) })}
-                className="admin-input w-full font-semibold"
+                className="admin-input w-full font-semibold text-xs"
               />
             </div>
           </div>

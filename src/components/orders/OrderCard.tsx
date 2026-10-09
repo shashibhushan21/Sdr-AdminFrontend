@@ -53,7 +53,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({
           </span>
           <button
             onClick={() => onOpenDetails(order)}
-            className="p-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition cursor-pointer"
+            className="p-1.5 rounded-md bg-slate-100 hover:bg-orange-600 hover:text-white text-slate-600 border border-slate-200/80 transition-all duration-150 cursor-pointer shadow-xs"
             title="View Details Popup"
           >
             <Eye size={15} />

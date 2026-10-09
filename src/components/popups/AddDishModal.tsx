@@ -7,6 +7,7 @@ interface AddDishModalProps {
     category: string;
     price: number;
     isVeg: boolean;
+    rating?: number;
     prepTimeMinutes?: number;
     description?: string;
     image?: string;
@@ -63,14 +64,14 @@ export const AddDishModal: React.FC<AddDishModalProps> = ({
             />
           </div>
 
-          {/* Category & Price & Prep Time */}
-          <div className="grid grid-cols-3 gap-3">
+          {/* Category & Price & Rating & Prep Time */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
               <label className="admin-label block mb-1">Category</label>
               <select
                 value={newDish.category}
                 onChange={(e) => setNewDish({ ...newDish, category: e.target.value })}
-                className="admin-input w-full cursor-pointer"
+                className="admin-input w-full cursor-pointer text-xs"
               >
                 <option value="Thalis">Thalis</option>
                 <option value="Combos">Combos</option>
@@ -89,18 +90,32 @@ export const AddDishModal: React.FC<AddDishModalProps> = ({
                 required
                 value={newDish.price}
                 onChange={(e) => setNewDish({ ...newDish, price: Number(e.target.value) })}
-                className="admin-input w-full font-bold"
+                className="admin-input w-full font-bold text-xs"
               />
             </div>
 
             <div>
-              <label className="admin-label block mb-1">Prep Time (Mins)</label>
+              <label className="admin-label block mb-1">Rating (★)</label>
+              <input
+                type="number"
+                step="0.1"
+                min="1.0"
+                max="5.0"
+                required
+                value={newDish.rating ?? 4.8}
+                onChange={(e) => setNewDish({ ...newDish, rating: Number(e.target.value) })}
+                className="admin-input w-full font-bold text-xs"
+              />
+            </div>
+
+            <div>
+              <label className="admin-label block mb-1">Prep (Mins)</label>
               <input
                 type="number"
                 required
                 value={newDish.prepTimeMinutes || 15}
                 onChange={(e) => setNewDish({ ...newDish, prepTimeMinutes: Number(e.target.value) })}
-                className="admin-input w-full font-semibold"
+                className="admin-input w-full font-semibold text-xs"
               />
             </div>
           </div>
