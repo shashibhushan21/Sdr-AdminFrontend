@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
-import { DashboardTab } from './components/dashboard/DashboardTab';
 import { OrdersTab } from './components/orders/OrdersTab';
 import { MenuTab } from './components/menu/MenuTab';
 import { VouchersTab } from './components/vouchers/VouchersTab';
@@ -240,11 +239,9 @@ export function App() {
         {/* BODY CANVAS */}
         <div className="p-3 sm:p-5 overflow-y-auto flex-1 space-y-4 sm:space-y-5">
           {activeTab === 'dashboard' && (
-            <DashboardTab
-              orders={orders}
-              onNavigateOrders={() => setActiveTab('orders')}
-              onOpenDetails={(ord) => setSelectedOrderPopup(ord)}
-            />
+            <div className="flex items-center justify-center min-h-[400px] text-slate-600 font-medium text-base bg-white rounded-xl shadow-xs border border-slate-200/80 p-8">
+              Working
+            </div>
           )}
 
           {activeTab === 'orders' && (

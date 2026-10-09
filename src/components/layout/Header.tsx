@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, ShieldCheck, RefreshCw, Menu } from 'lucide-react';
+import { Search, Bell, RefreshCw, Menu } from 'lucide-react';
 
 interface HeaderProps {
   searchTerm: string;
@@ -40,11 +40,6 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="flex items-center gap-2.5">
-        <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-600 text-white text-xs font-bold shadow-xs">
-          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-          <ShieldCheck size={14} className="text-white" />
-          Live Sync Active
-        </span>
         <button
           onClick={onRefresh}
           className="p-2 rounded-md bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition cursor-pointer shadow-xs"

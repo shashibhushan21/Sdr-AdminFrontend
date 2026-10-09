@@ -25,7 +25,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
   return (
     <div className="space-y-4">
       {/* Filter & View Switcher Bar */}
-      <div className="admin-card flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-0">
+      <div className="admin-card flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4 border-0 sticky top-0 z-10 bg-white shadow-sm p-3 sm:p-4">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="admin-title-md">Live Food Orders Board</h2>
