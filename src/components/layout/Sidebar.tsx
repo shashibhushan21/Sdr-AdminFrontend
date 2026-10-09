@@ -4,7 +4,6 @@ import {
   ShoppingBag,
   UtensilsCrossed,
   Ticket,
-  MapPin,
   X
 } from 'lucide-react';
 
@@ -33,7 +32,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
     },
     { id: 'menu', label: 'Menu & Inventory', icon: UtensilsCrossed },
     { id: 'vouchers', label: 'Vouchers & Offers', icon: Ticket },
-    { id: 'stations', label: 'Agra Delivery Hub', icon: MapPin },
   ];
 
   return (

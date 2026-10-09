@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { Plus, Star, Clock, Utensils, Search } from 'lucide-react';
+import { Plus, Star, Clock, Utensils, Search, Pencil, Trash2 } from 'lucide-react';
 import type { MenuItem } from '../../types/admin';
 
 interface MenuTabProps {
   menuItems: MenuItem[];
   onToggleAvailability: (id: string) => void;
   onOpenAddModal: () => void;
+  onOpenEditModal: (dish: MenuItem) => void;
+  onDeleteDish: (id: string) => void;
 }
 
 export const MenuTab: React.FC<MenuTabProps> = ({
   menuItems,
   onToggleAvailability,
   onOpenAddModal,
+  onOpenEditModal,
+  onDeleteDish,
 }) => {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -82,7 +86,7 @@ export const MenuTab: React.FC<MenuTabProps> = ({
       {/* Dish Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredItems.map((item) => (
-          <div key={item.id} className="admin-card flex flex-col justify-between space-y-3 border-0">
+          <div key={item.id} className="admin-card flex flex-col justify-between space-y-3 border-0 relative group">
             <div className="space-y-3">
               {/* Dish Header & Image */}
               <div className="flex items-start gap-3">
@@ -97,6 +101,24 @@ export const MenuTab: React.FC<MenuTabProps> = ({
                     <div className="flex items-center gap-1.5 min-w-0">
                       <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${item.isVeg ? 'bg-emerald-600' : 'bg-red-600'}`} title={item.isVeg ? '100% Pure Veg' : 'Non-Veg'} />
                       <h3 className="font-bold text-sm text-slate-900 truncate">{item.name}</h3>
+                    </div>
+
+                    {/* Quick Edit & Delete Action Buttons */}
+                    <div className="flex items-center gap-1 shrink-0">
+                      <button
+                        onClick={() => onOpenEditModal(item)}
+                        className="p-1 text-slate-400 hover:text-orange-600 hover:bg-orange-50 rounded-md transition cursor-pointer"
+                        title="Edit Dish"
+                      >
+                        <Pencil size={14} />
+                      </button>
+                      <button
+                        onClick={() => onDeleteDish(item.id)}
+                        className="p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition cursor-pointer"
+                        title="Delete Dish"
+                      >
+                        <Trash2 size={14} />
+                      </button>
                     </div>
                   </div>
 

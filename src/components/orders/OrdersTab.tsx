@@ -24,19 +24,20 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
 }) => {
   return (
     <div className="space-y-4">
-      {/* Filter & View Switcher Bar */}
-      <div className="admin-card flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4 border-0 sticky top-0 z-10 bg-white shadow-sm p-3 sm:p-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <h2 className="admin-title-md">Live Food Orders Board</h2>
-            <span className="bg-orange-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-md shadow-xs">
-              {filteredOrders.length} Orders
-            </span>
-          </div>
-          <p className="admin-subtitle">Update kitchen preparation and platform seat delivery status</p>
+      {/* Title Card */}
+      <div className="admin-card border-0">
+        <div className="flex items-center gap-2">
+          <h2 className="admin-title-md">Live Food Orders Board</h2>
+          <span className="bg-orange-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-md shadow-xs">
+            {filteredOrders.length} Orders
+          </span>
         </div>
+        <p className="admin-subtitle">Update kitchen preparation and train seat food delivery status</p>
+      </div>
 
-        <div className="flex items-center gap-3 flex-wrap w-full md:w-auto">
+      {/* Sticky Status Filters & View Switcher Bar */}
+      <div className="sticky top-0 z-30 bg-[#f8f6f0] py-1 -mt-2">
+        <div className="admin-card flex items-center justify-between gap-3 border-0 shadow-xs p-2.5 sm:p-3.5 bg-white">
           {/* Status Filters Pills */}
           <div className="flex items-center gap-1 bg-[#f8f6f0] p-1 rounded-md max-w-full overflow-x-auto">
             {['all', 'placed', 'confirmed', 'preparing', 'ready', 'out_for_delivery', 'delivered'].map((st) => (
@@ -45,7 +46,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
                 onClick={() => setStatusFilter(st)}
                 className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                   statusFilter === st
-                    ? 'bg-orange-600 text-white'
+                    ? 'bg-orange-600 text-white shadow-xs'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
                 }`}
               >

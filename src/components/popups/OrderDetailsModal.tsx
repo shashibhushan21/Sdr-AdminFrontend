@@ -51,7 +51,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
             </div>
             <div className="space-y-1">
               <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1.5 uppercase">
-                <MapPin size={13} className="text-orange-600" /> Platform Delivery Seat
+                <MapPin size={13} className="text-orange-600" /> Train Coach & Seat Delivery
               </span>
               <span className="font-bold text-orange-700 text-sm block">{order.station} ({order.stationCode})</span>
               <span className="block text-slate-700 font-medium text-xs">
@@ -100,7 +100,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
                 ) : null}
                 {order.deliveryFee ? (
                   <div className="flex justify-between items-center text-xs">
-                    <span>Platform Delivery Charge</span>
+                    <span>Train Seat Delivery Fee</span>
                     <span className="font-mono">₹{order.deliveryFee}</span>
                   </div>
                 ) : null}

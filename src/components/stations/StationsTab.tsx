@@ -13,7 +13,7 @@ export const StationsTab: React.FC = () => {
     <div className="space-y-5">
       <div className="admin-card border-0">
         <h2 className="admin-title-md">Agra Cantt (AGC) Delivery Points</h2>
-        <p className="admin-subtitle">Platform delivery coverage & assigned runners for Agra Cantt station</p>
+        <p className="admin-subtitle">Train seat food delivery coverage & assigned runners for Agra Cantt station</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

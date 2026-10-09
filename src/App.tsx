@@ -4,9 +4,9 @@ import { Header } from './components/layout/Header';
 import { OrdersTab } from './components/orders/OrdersTab';
 import { MenuTab } from './components/menu/MenuTab';
 import { VouchersTab } from './components/vouchers/VouchersTab';
-import { StationsTab } from './components/stations/StationsTab';
 import { OrderDetailsModal } from './components/popups/OrderDetailsModal';
 import { AddDishModal } from './components/popups/AddDishModal';
+import { EditDishModal } from './components/popups/EditDishModal';
 import { AddVoucherModal } from './components/popups/AddVoucherModal';
 import type { Order, MenuItem, Voucher, OrderStatus } from './types/admin';
 
@@ -131,6 +131,7 @@ export function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedOrderPopup, setSelectedOrderPopup] = useState<Order | null>(null);
   const [showAddDishModal, setShowAddDishModal] = useState(false);
+  const [editingDish, setEditingDish] = useState<MenuItem | null>(null);
   const [showAddVoucherModal, setShowAddVoucherModal] = useState(false);
   const [vouchers, setVouchers] = useState<Voucher[]>([
     { id: 'v1', code: 'TRAIN10', desc: '10% OFF on all Thali orders', minOrder: 300, discountType: 'percentage', discountValue: 10, valid: 'Active', badgeText: 'Popular' },
@@ -196,6 +197,22 @@ export function App() {
     setNewDish({ name: '', category: 'Thalis', price: 250, isVeg: true, prepTimeMinutes: 15, description: '', image: '/veg/veg_thali.jpg' });
   };
 
+  const handleEditDish = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingDish) return;
+    setMenuItems((prev) =>
+      prev.map((m) => (m.id === editingDish.id ? editingDish : m))
+    );
+    setEditingDish(null);
+  };
+
+  const handleDeleteDish = (id: string) => {
+    setMenuItems((prev) => prev.filter((m) => m.id !== id));
+    if (editingDish && editingDish.id === id) {
+      setEditingDish(null);
+    }
+  };
+
   const handleAddVoucher = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newVoucher.code) return;
@@ -227,7 +244,7 @@ export function App() {
       />
 
       {/* MAIN CONTENT AREA */}
-      <main className="flex-1 flex flex-col min-w-0">
+      <main className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* HEADER BAR */}
         <Header
           searchTerm={searchTerm}
@@ -261,6 +278,8 @@ export function App() {
               menuItems={menuItems}
               onToggleAvailability={toggleMenuAvailability}
               onOpenAddModal={() => setShowAddDishModal(true)}
+              onOpenEditModal={(dish) => setEditingDish(dish)}
+              onDeleteDish={handleDeleteDish}
             />
           )}
 
@@ -270,8 +289,6 @@ export function App() {
               onOpenAddModal={() => setShowAddVoucherModal(true)}
             />
           )}
-
-          {activeTab === 'stations' && <StationsTab />}
         </div>
       </main>
 
@@ -290,6 +307,16 @@ export function App() {
           setNewDish={setNewDish}
           onClose={() => setShowAddDishModal(false)}
           onSubmit={handleAddDish}
+        />
+      )}
+
+      {editingDish && (
+        <EditDishModal
+          editingDish={editingDish}
+          setEditingDish={setEditingDish}
+          onClose={() => setEditingDish(null)}
+          onSubmit={handleEditDish}
+          onDelete={handleDeleteDish}
         />
       )}
 

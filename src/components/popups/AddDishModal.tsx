@@ -142,15 +142,36 @@ export const AddDishModal: React.FC<AddDishModalProps> = ({
               ))}
             </div>
 
-            <div className="pt-1">
-              <label className="text-[11px] text-slate-500 font-medium block mb-1">Or enter custom image URL:</label>
-              <input
-                type="text"
-                placeholder="https://example.com/dish.jpg"
-                value={newDish.image || ''}
-                onChange={(e) => setNewDish({ ...newDish, image: e.target.value })}
-                className="admin-input w-full font-mono text-[11px]"
-              />
+            <div className="pt-1 space-y-2">
+              <div>
+                <label className="text-[11px] text-slate-500 font-medium block mb-1">Upload image file from device:</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        setNewDish({ ...newDish, image: reader.result as string });
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                  className="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-orange-100 file:text-orange-700 hover:file:bg-orange-200 cursor-pointer bg-[#f8f6f0] p-1.5 rounded-lg"
+                />
+              </div>
+
+              <div>
+                <label className="text-[11px] text-slate-500 font-medium block mb-1">Or enter custom image URL:</label>
+                <input
+                  type="text"
+                  placeholder="https://example.com/dish.jpg"
+                  value={newDish.image || ''}
+                  onChange={(e) => setNewDish({ ...newDish, image: e.target.value })}
+                  className="admin-input w-full font-mono text-[11px]"
+                />
+              </div>
             </div>
           </div>
 
