@@ -111,11 +111,13 @@ const INITIAL_ORDERS: Order[] = [
 ];
 
 const INITIAL_MENU: MenuItem[] = [
-  { id: 'm1', name: 'SDR Maharaja Special Thali', category: 'Thalis', price: 350, isVeg: true, isAvailable: true, ordersCount: 142, rating: 4.9, prepTimeMinutes: 20, description: 'Paneer butter masala, dal makhani, 4 butter rotis, jeera rice, gulab jamun & sweet lassi', tags: ['Maharaja Special', 'Best Seller'] },
-  { id: 'm2', name: 'Executive Train Meal Thali', category: 'Thalis', price: 280, isVeg: true, isAvailable: true, ordersCount: 98, rating: 4.8, prepTimeMinutes: 15, description: 'Kadhai paneer, yellow dal tadka, 3 rotis, steamed rice & pickle', tags: ['Executive Choice'] },
-  { id: 'm3', name: 'Special Amritsari Kulcha Thali', category: 'Thalis', price: 240, isVeg: true, isAvailable: true, ordersCount: 76, rating: 4.7, prepTimeMinutes: 15, description: '2 stuffed Amritsari kulchas, pindi chole, imli pyaz chutney & raita', tags: ['Punjab Special'] },
-  { id: 'm4', name: 'Paneer Butter Masala Combo', category: 'Combos', price: 290, isVeg: true, isAvailable: true, ordersCount: 110, rating: 4.9, prepTimeMinutes: 15, description: 'Rich paneer butter masala with 2 garlic naans or jeera rice bowl', tags: ['Fast Prep'] },
-  { id: 'm5', name: 'Chole Bhature Express Bowl', category: 'Quick Bites', price: 180, isVeg: true, isAvailable: false, ordersCount: 64, rating: 4.6, prepTimeMinutes: 10, description: '2 fluffy bhatures with authentic spiced chole and fried green chillies', tags: ['Quick Snack'] },
+  { id: 'm1', name: 'SDR Maharaja Special Thali', category: 'Thalis', price: 350, isVeg: true, isAvailable: true, ordersCount: 142, rating: 4.9, prepTimeMinutes: 20, image: '/veg/veg_thali.jpg', description: 'Paneer butter masala, dal makhani, 4 butter rotis, jeera rice, gulab jamun & sweet lassi', tags: ['Maharaja Special', 'Best Seller'] },
+  { id: 'm2', name: 'Executive Train Meal Thali', category: 'Thalis', price: 280, isVeg: true, isAvailable: true, ordersCount: 98, rating: 4.8, prepTimeMinutes: 15, image: '/categories/thali.png', description: 'Kadhai paneer, yellow dal tadka, 3 rotis, steamed rice & pickle', tags: ['Executive Choice'] },
+  { id: 'm3', name: 'Special Amritsari Kulcha Thali', category: 'Thalis', price: 240, isVeg: true, isAvailable: true, ordersCount: 76, rating: 4.7, prepTimeMinutes: 15, image: '/food/chole_bhature.png', description: '2 stuffed Amritsari kulchas, pindi chole, imli pyaz chutney & raita', tags: ['Punjab Special'] },
+  { id: 'm4', name: 'Paneer Butter Masala Combo', category: 'Combos', price: 290, isVeg: true, isAvailable: true, ordersCount: 110, rating: 4.9, prepTimeMinutes: 15, image: '/food/paneer_tikka.png', description: 'Rich paneer butter masala with 2 garlic naans or jeera rice bowl', tags: ['Fast Prep'] },
+  { id: 'm5', name: 'Chole Bhature Express Bowl', category: 'Quick Bites', price: 180, isVeg: true, isAvailable: false, ordersCount: 64, rating: 4.6, prepTimeMinutes: 10, image: '/food/chole_bhature.png', description: '2 fluffy bhatures with authentic spiced chole and fried green chillies', tags: ['Quick Snack'] },
+  { id: 'm6', name: 'Dal Makhani Special Bowl', category: 'Mains', price: 220, isVeg: true, isAvailable: true, ordersCount: 88, rating: 4.8, prepTimeMinutes: 15, image: '/food/dal_makhani.png', description: 'Slow-cooked creamy black lentils with fresh butter rotis or basmati rice', tags: ['Classic'] },
+  { id: 'm7', name: 'Paneer Biryani Express', category: 'Mains', price: 260, isVeg: true, isAvailable: true, ordersCount: 95, rating: 4.9, prepTimeMinutes: 15, image: '/food/biryani.png', description: 'Aromatic basmati rice cooked with marinated cottage cheese & spices', tags: ['Best Seller'] },
 ];
 
 export function App() {
@@ -137,7 +139,15 @@ export function App() {
     { id: 'v3', code: 'MAHARAJA', desc: '15% OFF on Maharaja Special Thali', minOrder: 500, discountType: 'percentage', discountValue: 15, valid: 'Active' },
   ]);
 
-  const [newDish, setNewDish] = useState({ name: '', category: 'Thalis', price: 250, isVeg: true, prepTimeMinutes: 15 });
+  const [newDish, setNewDish] = useState({ 
+    name: '', 
+    category: 'Thalis', 
+    price: 250, 
+    isVeg: true, 
+    prepTimeMinutes: 15,
+    description: '',
+    image: '/veg/veg_thali.jpg'
+  });
   const [newVoucher, setNewVoucher] = useState({ code: '', desc: '', minOrder: 200, discountType: 'flat' as const, discountValue: 50 });
 
   const filteredOrders = orders.filter((ord) => {
@@ -179,10 +189,12 @@ export function App() {
       ordersCount: 0,
       rating: 5.0,
       prepTimeMinutes: Number(newDish.prepTimeMinutes) || 15,
+      description: newDish.description || `${newDish.name} prepared freshly at Agra Cantt kitchen`,
+      image: newDish.image || '/veg/veg_thali.jpg',
     };
     setMenuItems((prev) => [dishToAdd, ...prev]);
     setShowAddDishModal(false);
-    setNewDish({ name: '', category: 'Thalis', price: 250, isVeg: true, prepTimeMinutes: 15 });
+    setNewDish({ name: '', category: 'Thalis', price: 250, isVeg: true, prepTimeMinutes: 15, description: '', image: '/veg/veg_thali.jpg' });
   };
 
   const handleAddVoucher = (e: React.FormEvent) => {

@@ -39,7 +39,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       {/* DESKTOP SIDEBAR */}
-      <aside className="hidden md:flex w-64 bg-[#f8f6f0] flex-col justify-between shrink-0 sticky top-0 h-screen z-30">
+      <aside className="hidden md:flex w-64 bg-[#f8f6f0] flex-col justify-start shrink-0 sticky top-0 h-screen z-30">
         <div>
           {/* Brand Header */}
           <div className="p-4 flex items-center gap-3 mb-2">
@@ -87,27 +87,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
             })}
           </nav>
         </div>
-
-        {/* User Hub Badge */}
-        <div className="p-4">
-          <div className="bg-white rounded-lg p-3 flex items-center gap-3 shadow-xs">
-            <div className="w-8 h-8 rounded-md bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
-              AG
-            </div>
-            <div className="min-w-0">
-              <p className="text-xs font-bold text-slate-900 truncate">Agra Hub Admin</p>
-              <p className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live Sync Active
-              </p>
-            </div>
-          </div>
-        </div>
       </aside>
 
       {/* MOBILE SIDEBAR DRAWER POPUP */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 md:hidden bg-slate-900/60 backdrop-blur-xs flex">
-          <div className="w-64 bg-[#f8f6f0] h-full flex flex-col justify-between p-4 shadow-xl animate-in slide-in-from-left duration-200">
+          <div className="w-64 bg-[#f8f6f0] h-full flex flex-col justify-start p-4 shadow-xl animate-in slide-in-from-left duration-200">
             <div>
               <div className="flex items-center justify-between pb-4">
                 <div className="flex items-center gap-2.5">
@@ -154,10 +139,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   );
                 })}
               </nav>
-            </div>
-
-            <div className="bg-white rounded-lg p-3 text-xs font-semibold text-slate-700 shadow-xs">
-              Agra Hub Connected
             </div>
           </div>
           <div className="flex-1" onClick={() => setMobileMenuOpen(false)} />

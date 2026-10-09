@@ -47,6 +47,7 @@ export interface MenuItem {
   rating: number;
   prepTimeMinutes: number;
   description?: string;
+  image?: string;
   tags?: string[];
 }
 

@@ -113,15 +113,53 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
             </div>
           </div>
 
-          {/* Fulfillment Status Toggle Buttons */}
+          {/* Customer Live Tracking Stepper Sync */}
+          <div className="p-4 rounded-lg bg-[#f8f6f0] space-y-3">
+            <span className="text-xs font-bold text-slate-800 flex items-center justify-between uppercase tracking-wider">
+              <span>User Side Live Stepper Sync</span>
+              <span className="text-orange-600 font-mono text-[11px] font-bold">Stage: {order.status.replace(/_/g, ' ')}</span>
+            </span>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px]">
+              {[
+                { status: 'placed', title: '1. Order Received', subtitle: 'Order received' },
+                { status: 'confirmed', title: '2. Confirmed', subtitle: 'Kitchen said yes!' },
+                { status: 'preparing', title: '3. Preparing', subtitle: 'Chef is cooking' },
+                { status: 'ready', title: '4. Ready', subtitle: 'Packed and sealed' },
+                { status: 'out_for_delivery', title: '5. Out for Delivery', subtitle: 'On the way to coach' },
+                { status: 'delivered', title: '6. Delivered', subtitle: 'Enjoy your meal!' },
+              ].map((step) => {
+                const isActive = order.status === step.status;
+                return (
+                  <button
+                    key={step.status}
+                    type="button"
+                    onClick={() => onUpdateStatus(order.id, step.status as OrderStatus)}
+                    className={`p-2 rounded-lg text-left transition cursor-pointer border ${
+                      isActive
+                        ? 'bg-orange-600 text-white border-orange-600 shadow-xs'
+                        : 'bg-white text-slate-700 border-slate-200 hover:border-orange-300'
+                    }`}
+                  >
+                    <span className="font-bold block text-[11px]">{step.title}</span>
+                    <span className={`text-[10px] block ${isActive ? 'text-orange-100' : 'text-slate-400'}`}>
+                      "{step.subtitle}"
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Fulfillment Status Action Buttons */}
           <div className="space-y-2 pt-1">
-            <span className="text-xs font-semibold text-slate-700 block">Update Live Fulfillment Stage</span>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <span className="text-xs font-semibold text-slate-700 block">Quick Status Action</span>
+            <div className="flex items-center gap-2 flex-wrap">
               {(['placed', 'confirmed', 'preparing', 'ready', 'out_for_delivery', 'delivered', 'cancelled'] as const).map((st) => (
                 <button
                   key={st}
                   onClick={() => onUpdateStatus(order.id, st)}
-                  className={`py-2 rounded-md text-xs font-bold transition cursor-pointer text-center ${
+                  className={`px-3 py-1.5 rounded-md text-xs font-bold transition cursor-pointer text-center ${
                     order.status === st
                       ? 'bg-orange-600 text-white'
                       : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
@@ -137,7 +175,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
         {/* Footer */}
         <div className="pt-2 flex justify-end">
           <button onClick={onClose} className="admin-btn-secondary cursor-pointer px-5 py-2 text-xs">
-            Close Popup
+            Close Details
           </button>
         </div>
       </div>
