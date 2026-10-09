@@ -24,11 +24,36 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
 }) => {
   return (
     <div className="space-y-3 sm:space-y-4">
-      {/* Sticky Status Filters & View Switcher Bar - Flush under Header */}
-      <div className="sticky top-0 z-10 bg-[#f8f6f0] -mx-3 px-3 py-1.5 sm:-mx-4 sm:px-4 sm:py-2 border-b border-slate-200/60 shadow-xs">
-        <div className="flex items-center justify-between gap-2.5 sm:gap-3">
-          {/* Status Filters Pills */}
-          <div className="flex items-center gap-1 bg-white p-1 rounded-lg shadow-xs border border-slate-200/60 max-w-full overflow-x-auto">
+      {/* Sticky Status Filters & View Switcher Bar - 2 Rows on Mobile, 1 Row on Desktop */}
+      <div className="sticky top-0 z-10 bg-[#f8f6f0] -mx-3 px-3 py-2 sm:-mx-4 sm:px-4 sm:py-2.5 border-0 shadow-xs space-y-2">
+        <div className="flex flex-col sm:flex-row-reverse sm:items-center sm:justify-between gap-2">
+          {/* Row 1 on Mobile / Right side on Desktop: View Mode Toggle */}
+          <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider sm:hidden">Filter Status:</span>
+            <div className="flex items-center gap-1 bg-white p-1 rounded-lg shadow-xs border border-slate-200/60 shrink-0">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold ${
+                  viewMode === 'grid' ? 'bg-orange-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                }`}
+                title="Grid View"
+              >
+                <Grid size={14} /> Grid
+              </button>
+              <button
+                onClick={() => setViewMode('table')}
+                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold ${
+                  viewMode === 'table' ? 'bg-orange-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                }`}
+                title="Table View"
+              >
+                <List size={14} /> Table
+              </button>
+            </div>
+          </div>
+
+          {/* Row 2 on Mobile / Left side on Desktop: Status Filters Pills */}
+          <div className="flex items-center gap-1 bg-white p-1 rounded-lg shadow-xs border-0 max-w-full overflow-x-auto">
             {['all', 'placed', 'confirmed', 'preparing', 'ready', 'out_for_delivery', 'delivered'].map((st) => (
               <button
                 key={st}
@@ -42,28 +67,6 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
                 {st === 'all' ? 'All Orders' : st.replace(/_/g, ' ')}
               </button>
             ))}
-          </div>
-
-          {/* View Mode Toggle */}
-          <div className="flex items-center gap-1 bg-white p-1 rounded-lg shadow-xs border border-slate-200/60 shrink-0">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`p-1 rounded-md transition-all cursor-pointer ${
-                viewMode === 'grid' ? 'bg-orange-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-              }`}
-              title="Grid View"
-            >
-              <Grid size={15} />
-            </button>
-            <button
-              onClick={() => setViewMode('table')}
-              className={`p-1 rounded-md transition-all cursor-pointer ${
-                viewMode === 'table' ? 'bg-orange-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-              }`}
-              title="Table View"
-            >
-              <List size={15} />
-            </button>
           </div>
         </div>
       </div>

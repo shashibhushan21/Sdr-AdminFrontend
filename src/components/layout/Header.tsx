@@ -15,7 +15,7 @@ export const Header: React.FC<HeaderProps> = ({
   setMobileMenuOpen,
 }) => {
   return (
-    <header className="h-14 bg-[#f8f6f0] px-3 sm:px-6 flex items-center justify-between sticky top-0 z-20 shrink-0 border-b border-slate-200/40">
+    <header className="h-14 bg-[#f8f6f0] px-3 sm:px-6 flex items-center justify-between sticky top-0 z-20 shrink-0 border-0">
       <div className="flex items-center gap-3">
         {/* Mobile Hamburger Drawer Trigger */}
         <button
