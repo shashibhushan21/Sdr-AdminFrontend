@@ -16,7 +16,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 }) => {
   const isPositive = trend.startsWith('+');
   return (
-    <div className="admin-card space-y-3 border-0 transition-shadow duration-200 hover:shadow-md">
+    <div className="admin-card space-y-3 border-0">
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{title}</span>
         <span

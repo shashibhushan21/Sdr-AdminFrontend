@@ -39,17 +39,17 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
         <div className="flex items-center gap-3 flex-wrap w-full md:w-auto">
           {/* Status Filters Pills */}
           <div className="flex items-center gap-1 bg-[#f8f6f0] p-1 rounded-md max-w-full overflow-x-auto">
-            {['all', 'placed', 'preparing', 'out_for_delivery', 'delivered'].map((st) => (
+            {['all', 'placed', 'confirmed', 'preparing', 'ready', 'out_for_delivery', 'delivered'].map((st) => (
               <button
                 key={st}
                 onClick={() => setStatusFilter(st)}
                 className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                   statusFilter === st
-                    ? 'bg-orange-600 text-white shadow-xs'
+                    ? 'bg-orange-600 text-white'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
                 }`}
               >
-                {st === 'all' ? 'All Orders' : st.replace('_', ' ')}
+                {st === 'all' ? 'All Orders' : st.replace(/_/g, ' ')}
               </button>
             ))}
           </div>

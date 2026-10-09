@@ -28,7 +28,7 @@ export const VouchersTab: React.FC<VouchersTabProps> = ({
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {vouchers.map((v, i) => (
-          <div key={i} className="admin-card space-y-3 border-0 transition-shadow duration-200 hover:shadow-md">
+          <div key={i} className="admin-card space-y-3 border-0">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 font-mono font-bold text-sm text-white bg-orange-600 px-2.5 py-1 rounded-md shadow-xs">
                 <Tag size={14} />

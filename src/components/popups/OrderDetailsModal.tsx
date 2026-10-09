@@ -17,11 +17,11 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
     <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
       <div className="bg-white w-full max-w-lg rounded-xl p-6 space-y-5 max-h-[90vh] overflow-y-auto shadow-xl animate-in fade-in zoom-in-95 duration-150">
         {/* Header */}
-        <div className="flex items-center justify-between pb-4">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div>
             <span className="font-mono font-bold text-orange-600 text-lg block">{order.id}</span>
             <span className="text-xs text-slate-500 font-medium">
-              PNR: <span className="font-mono text-slate-800">{order.pnr}</span> · {order.trainNo}
+              PNR: <span className="font-mono text-slate-800">{order.pnr}</span> · Train {order.trainNo} {order.trainName && `(${order.trainName})`}
             </span>
           </div>
           <button 
@@ -37,30 +37,47 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-lg bg-[#f8f6f0]">
             <div className="space-y-1">
               <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1.5 uppercase">
-                <User size={13} className="text-orange-600" /> Passenger
+                <User size={13} className="text-orange-600" /> Passenger Details
               </span>
               <span className="font-bold text-slate-900 text-sm block">{order.customerName}</span>
               <span className="block text-slate-600 font-mono text-xs flex items-center gap-1">
                 <Phone size={11} /> {order.mobile}
               </span>
+              {order.altMobile && (
+                <span className="block text-slate-500 text-[11px]">
+                  Alt: {order.altName ? `${order.altName} (` : ''}{order.altMobile}{order.altName ? ')' : ''}
+                </span>
+              )}
             </div>
             <div className="space-y-1">
               <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1.5 uppercase">
-                <MapPin size={13} className="text-orange-600" /> Delivery Station
+                <MapPin size={13} className="text-orange-600" /> Platform Delivery Seat
               </span>
               <span className="font-bold text-orange-700 text-sm block">{order.station} ({order.stationCode})</span>
               <span className="block text-slate-700 font-medium text-xs">
                 Coach <span className="text-slate-900 font-bold">{order.coach}</span>, Seat <span className="text-slate-900 font-bold">{order.seat}</span>
               </span>
+              {order.assignedRunner && (
+                <span className="block text-emerald-700 font-semibold text-[11px]">
+                  Runner: {order.assignedRunner}
+                </span>
+              )}
             </div>
           </div>
+
+          {order.specialInstructions && (
+            <div className="p-3 bg-amber-50 rounded-lg text-amber-900 text-xs">
+              <span className="font-bold block">Special Cooking / Packing Instructions:</span>
+              <p className="mt-0.5 font-medium">{order.specialInstructions}</p>
+            </div>
+          )}
 
           {/* Complete Itemized Dishes List */}
           <div className="space-y-2">
             <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5 uppercase tracking-wider">
-              <ShoppingBag size={14} className="text-orange-600" /> Full Itemized Dishes Breakdown
+              <ShoppingBag size={14} className="text-orange-600" /> Itemized Bill Breakdown
             </span>
-            <div className="p-4 rounded-lg bg-[#f8f6f0] space-y-2.5">
+            <div className="p-4 rounded-lg bg-[#f8f6f0] space-y-2">
               {order.items.map((it, idx) => (
                 <div key={idx} className="flex justify-between items-center text-slate-800 text-xs font-medium">
                   <span>
@@ -69,8 +86,28 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
                   <span className="font-mono font-bold text-slate-900">₹{it.price * it.qty}</span>
                 </div>
               ))}
-              <div className="pt-3 border-t border-slate-200/80 flex justify-between items-center text-sm font-bold text-slate-900">
-                <span>Total Amount Paid ({order.paymentMethod})</span>
+              
+              <div className="pt-2 border-t border-slate-200/80 space-y-1 text-slate-600">
+                <div className="flex justify-between items-center text-xs">
+                  <span>Item Subtotal</span>
+                  <span className="font-mono">₹{order.subtotal || order.total}</span>
+                </div>
+                {order.gst ? (
+                  <div className="flex justify-between items-center text-xs">
+                    <span>GST (5%)</span>
+                    <span className="font-mono">₹{order.gst}</span>
+                  </div>
+                ) : null}
+                {order.deliveryFee ? (
+                  <div className="flex justify-between items-center text-xs">
+                    <span>Platform Delivery Charge</span>
+                    <span className="font-mono">₹{order.deliveryFee}</span>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="pt-2 border-t border-slate-300 flex justify-between items-center text-sm font-bold text-slate-900">
+                <span>Total Amount ({order.paymentMethod} - {order.paymentStatus})</span>
                 <span className="font-mono font-extrabold text-emerald-700 text-base">₹{order.total}</span>
               </div>
             </div>
@@ -78,19 +115,19 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
 
           {/* Fulfillment Status Toggle Buttons */}
           <div className="space-y-2 pt-1">
-            <span className="text-xs font-semibold text-slate-700 block">Update Fulfillment Status</span>
+            <span className="text-xs font-semibold text-slate-700 block">Update Live Fulfillment Stage</span>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {(['placed', 'preparing', 'out_for_delivery', 'delivered'] as const).map((st) => (
+              {(['placed', 'confirmed', 'preparing', 'ready', 'out_for_delivery', 'delivered', 'cancelled'] as const).map((st) => (
                 <button
                   key={st}
                   onClick={() => onUpdateStatus(order.id, st)}
-                  className={`py-2 rounded-md text-xs font-semibold transition cursor-pointer text-center ${
+                  className={`py-2 rounded-md text-xs font-bold transition cursor-pointer text-center ${
                     order.status === st
-                      ? 'bg-orange-600 text-white shadow-xs'
+                      ? 'bg-orange-600 text-white'
                       : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
                   }`}
                 >
-                  {st === 'out_for_delivery' ? 'Delivery' : st.replace('_', ' ')}
+                  {st === 'out_for_delivery' ? 'Delivery' : st.replace(/_/g, ' ')}
                 </button>
               ))}
             </div>

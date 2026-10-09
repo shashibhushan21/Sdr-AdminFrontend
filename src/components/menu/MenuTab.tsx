@@ -31,7 +31,7 @@ export const MenuTab: React.FC<MenuTabProps> = ({
       {/* Dish Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {menuItems.map((item) => (
-          <div key={item.id} className="admin-card space-y-3.5 border-0 transition-shadow duration-200 hover:shadow-md">
+          <div key={item.id} className="admin-card space-y-3.5 border-0">
             <div className="flex items-start justify-between">
               <div>
                 <div className="flex items-center gap-2">

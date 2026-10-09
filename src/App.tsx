@@ -17,11 +17,16 @@ const INITIAL_ORDERS: Order[] = [
     pnr: '2456789012',
     customerName: 'Rajesh Sharma',
     mobile: '+91 98765 43210',
+    altName: 'Sunita Sharma',
+    altMobile: '+91 98765 99887',
     items: [
       { name: 'SDR Maharaja Special Thali', qty: 1, isVeg: true, price: 350 },
       { name: 'Cold Drink (300ml)', qty: 1, isVeg: true, price: 70 },
     ],
-    total: 420,
+    subtotal: 420,
+    gst: 21,
+    deliveryFee: 30,
+    total: 471,
     station: 'Agra Cantt',
     stationCode: 'AGC',
     coach: 'C3',
@@ -30,7 +35,10 @@ const INITIAL_ORDERS: Order[] = [
     paymentMethod: 'UPI',
     paymentStatus: 'Paid',
     time: '10m ago',
-    trainNo: '12002 Shatabdi Exp',
+    trainNo: '12002',
+    trainName: 'Shatabdi Express',
+    specialInstructions: 'Please ensure thali is packed extra hot with extra tissue paper.',
+    assignedRunner: 'Ramesh Singh (+91 98765 11223)',
   },
   {
     id: 'SDR-ORD-4435-6679',
@@ -41,16 +49,21 @@ const INITIAL_ORDERS: Order[] = [
       { name: 'Executive Train Meal Thali', qty: 2, isVeg: true, price: 280 },
       { name: 'Sweet Lassi', qty: 2, isVeg: true, price: 60 },
     ],
-    total: 680,
-    station: 'Mathura Jn',
-    stationCode: 'MTJ',
+    subtotal: 680,
+    gst: 34,
+    deliveryFee: 30,
+    total: 744,
+    station: 'Agra Cantt',
+    stationCode: 'AGC',
     coach: 'B1',
     seat: '12',
     status: 'placed',
     paymentMethod: 'COD',
     paymentStatus: 'Pending',
     time: '18m ago',
-    trainNo: '12626 Kerala Exp',
+    trainNo: '12626',
+    trainName: 'Kerala Express',
+    specialInstructions: 'Deliver to window seat 12 directly.',
   },
   {
     id: 'SDR-ORD-4435-6680',
@@ -58,16 +71,21 @@ const INITIAL_ORDERS: Order[] = [
     customerName: 'Amit Patel',
     mobile: '+91 99887 76655',
     items: [{ name: 'Special Amritsari Kulcha Thali', qty: 1, isVeg: true, price: 240 }],
-    total: 240,
-    station: 'New Delhi',
-    stationCode: 'NDLS',
+    subtotal: 240,
+    gst: 12,
+    deliveryFee: 30,
+    total: 282,
+    station: 'Agra Cantt',
+    stationCode: 'AGC',
     coach: 'S4',
     seat: '56',
     status: 'out_for_delivery',
     paymentMethod: 'UPI',
     paymentStatus: 'Paid',
     time: '25m ago',
-    trainNo: '12423 Rajdhani Exp',
+    trainNo: '12423',
+    trainName: 'Rajdhani Express',
+    assignedRunner: 'Sunil Sharma (+91 99887 55667)',
   },
   {
     id: 'SDR-ORD-4435-6681',
@@ -75,25 +93,29 @@ const INITIAL_ORDERS: Order[] = [
     customerName: 'Suresh Gupta',
     mobile: '+91 97654 32109',
     items: [{ name: 'Paneer Butter Masala Combo', qty: 3, isVeg: true, price: 290 }],
-    total: 870,
-    station: 'Gwalior Jn',
-    stationCode: 'GWL',
+    subtotal: 870,
+    gst: 43.5,
+    deliveryFee: 30,
+    total: 943.5,
+    station: 'Agra Cantt',
+    stationCode: 'AGC',
     coach: 'A2',
     seat: '08',
     status: 'delivered',
     paymentMethod: 'UPI',
     paymentStatus: 'Paid',
     time: '45m ago',
-    trainNo: '12001 Vande Bharat',
+    trainNo: '12001',
+    trainName: 'Vande Bharat Exp',
   },
 ];
 
 const INITIAL_MENU: MenuItem[] = [
-  { id: 'm1', name: 'SDR Maharaja Special Thali', category: 'Thalis', price: 350, isVeg: true, isAvailable: true, ordersCount: 142, rating: 4.9 },
-  { id: 'm2', name: 'Executive Train Meal Thali', category: 'Thalis', price: 280, isVeg: true, isAvailable: true, ordersCount: 98, rating: 4.8 },
-  { id: 'm3', name: 'Special Amritsari Kulcha Thali', category: 'Thalis', price: 240, isVeg: true, isAvailable: true, ordersCount: 76, rating: 4.7 },
-  { id: 'm4', name: 'Paneer Butter Masala Combo', category: 'Combos', price: 290, isVeg: true, isAvailable: true, ordersCount: 110, rating: 4.9 },
-  { id: 'm5', name: 'Chole Bhature Express Bowl', category: 'Quick Bites', price: 180, isVeg: true, isAvailable: false, ordersCount: 64, rating: 4.6 },
+  { id: 'm1', name: 'SDR Maharaja Special Thali', category: 'Thalis', price: 350, isVeg: true, isAvailable: true, ordersCount: 142, rating: 4.9, prepTimeMinutes: 20, description: 'Paneer butter masala, dal makhani, 4 butter rotis, jeera rice, gulab jamun & sweet lassi', tags: ['Maharaja Special', 'Best Seller'] },
+  { id: 'm2', name: 'Executive Train Meal Thali', category: 'Thalis', price: 280, isVeg: true, isAvailable: true, ordersCount: 98, rating: 4.8, prepTimeMinutes: 15, description: 'Kadhai paneer, yellow dal tadka, 3 rotis, steamed rice & pickle', tags: ['Executive Choice'] },
+  { id: 'm3', name: 'Special Amritsari Kulcha Thali', category: 'Thalis', price: 240, isVeg: true, isAvailable: true, ordersCount: 76, rating: 4.7, prepTimeMinutes: 15, description: '2 stuffed Amritsari kulchas, pindi chole, imli pyaz chutney & raita', tags: ['Punjab Special'] },
+  { id: 'm4', name: 'Paneer Butter Masala Combo', category: 'Combos', price: 290, isVeg: true, isAvailable: true, ordersCount: 110, rating: 4.9, prepTimeMinutes: 15, description: 'Rich paneer butter masala with 2 garlic naans or jeera rice bowl', tags: ['Fast Prep'] },
+  { id: 'm5', name: 'Chole Bhature Express Bowl', category: 'Quick Bites', price: 180, isVeg: true, isAvailable: false, ordersCount: 64, rating: 4.6, prepTimeMinutes: 10, description: '2 fluffy bhatures with authentic spiced chole and fried green chillies', tags: ['Quick Snack'] },
 ];
 
 export function App() {
@@ -110,20 +132,21 @@ export function App() {
   const [showAddDishModal, setShowAddDishModal] = useState(false);
   const [showAddVoucherModal, setShowAddVoucherModal] = useState(false);
   const [vouchers, setVouchers] = useState<Voucher[]>([
-    { code: 'TRAIN10', desc: '10% OFF on all Thali orders', minOrder: 300, valid: 'Active' },
-    { code: 'SDRFIRST', desc: 'Flat ₹50 OFF on first order', minOrder: 250, valid: 'Active' },
-    { code: 'MAHARAJA', desc: '15% OFF on Maharaja Special Thali', minOrder: 500, valid: 'Active' },
+    { id: 'v1', code: 'TRAIN10', desc: '10% OFF on all Thali orders', minOrder: 300, discountType: 'percentage', discountValue: 10, valid: 'Active', badgeText: 'Popular' },
+    { id: 'v2', code: 'SDRFIRST', desc: 'Flat ₹50 OFF on first train order', minOrder: 250, discountType: 'flat', discountValue: 50, valid: 'Active', badgeText: 'New User' },
+    { id: 'v3', code: 'MAHARAJA', desc: '15% OFF on Maharaja Special Thali', minOrder: 500, discountType: 'percentage', discountValue: 15, valid: 'Active' },
   ]);
 
-  const [newDish, setNewDish] = useState({ name: '', category: 'Thalis', price: 250, isVeg: true });
-  const [newVoucher, setNewVoucher] = useState({ code: '', desc: '', minOrder: 200 });
+  const [newDish, setNewDish] = useState({ name: '', category: 'Thalis', price: 250, isVeg: true, prepTimeMinutes: 15 });
+  const [newVoucher, setNewVoucher] = useState({ code: '', desc: '', minOrder: 200, discountType: 'flat' as const, discountValue: 50 });
 
   const filteredOrders = orders.filter((ord) => {
     const matchesSearch =
       ord.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       ord.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       ord.pnr.includes(searchTerm) ||
-      ord.trainNo.toLowerCase().includes(searchTerm.toLowerCase());
+      ord.trainNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ord.trainName.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || ord.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -155,21 +178,30 @@ export function App() {
       isAvailable: true,
       ordersCount: 0,
       rating: 5.0,
+      prepTimeMinutes: Number(newDish.prepTimeMinutes) || 15,
     };
     setMenuItems((prev) => [dishToAdd, ...prev]);
     setShowAddDishModal(false);
-    setNewDish({ name: '', category: 'Thalis', price: 250, isVeg: true });
+    setNewDish({ name: '', category: 'Thalis', price: 250, isVeg: true, prepTimeMinutes: 15 });
   };
 
   const handleAddVoucher = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newVoucher.code) return;
     setVouchers((prev) => [
-      { code: newVoucher.code.toUpperCase(), desc: newVoucher.desc || 'Promo Discount', minOrder: Number(newVoucher.minOrder), valid: 'Active' },
+      {
+        id: `v${Date.now()}`,
+        code: newVoucher.code.toUpperCase(),
+        desc: newVoucher.desc || 'Promo Discount',
+        minOrder: Number(newVoucher.minOrder),
+        discountType: newVoucher.discountType,
+        discountValue: Number(newVoucher.discountValue),
+        valid: 'Active',
+      },
       ...prev,
     ]);
     setShowAddVoucherModal(false);
-    setNewVoucher({ code: '', desc: '', minOrder: 200 });
+    setNewVoucher({ code: '', desc: '', minOrder: 200, discountType: 'flat', discountValue: 50 });
   };
 
   return (
@@ -178,7 +210,7 @@ export function App() {
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        pendingOrdersCount={orders.filter((o) => o.status !== 'delivered').length}
+        pendingOrdersCount={orders.filter((o) => o.status !== 'delivered' && o.status !== 'cancelled').length}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />

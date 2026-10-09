@@ -32,10 +32,10 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           desc="94 delivered, 34 in progress"
         />
         <MetricCard
-          title="Active Train Halts"
-          value="12 Halts"
-          trend="Agra, MTJ, NDLS"
-          desc="4 delivery hubs online"
+          title="Agra Cantt Halts"
+          value="18 Trains"
+          trend="AGC Station"
+          desc="Platform delivery active"
         />
         <MetricCard
           title="Avg Delivery Time"

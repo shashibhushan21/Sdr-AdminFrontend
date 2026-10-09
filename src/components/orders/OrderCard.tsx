@@ -19,8 +19,14 @@ export const OrderCard: React.FC<OrderCardProps> = ({
         return 'admin-badge-delivered';
       case 'out_for_delivery':
         return 'admin-badge-delivery';
+      case 'ready':
+        return 'admin-badge-ready';
       case 'preparing':
         return 'admin-badge-preparing';
+      case 'confirmed':
+        return 'admin-badge-confirmed';
+      case 'cancelled':
+        return 'admin-badge-cancelled';
       default:
         return 'admin-badge-placed';
     }
@@ -31,19 +37,19 @@ export const OrderCard: React.FC<OrderCardProps> = ({
   const remainingCount = order.items.length - 1;
 
   return (
-    <div className="admin-card space-y-3 border-0 transition-shadow duration-200 hover:shadow-md">
+    <div className="admin-card space-y-3 border-0">
       {/* Header */}
       <div className="flex items-center justify-between pb-2">
         <div>
           <span className="font-mono font-bold text-orange-600 text-sm block">{order.id}</span>
           <span className="text-xs text-slate-500 font-medium">
-            PNR: <span className="font-mono text-slate-700">{order.pnr}</span> · {order.trainNo}
+            PNR: <span className="font-mono text-slate-800">{order.pnr}</span> · Train {order.trainNo} {order.trainName && `(${order.trainName})`}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           <span className={getBadgeClass(order.status)}>
-            {order.status.replace('_', ' ')}
+            {order.status.replace(/_/g, ' ')}
           </span>
           <button
             onClick={() => onOpenDetails(order)}
@@ -65,14 +71,14 @@ export const OrderCard: React.FC<OrderCardProps> = ({
         <div className="flex items-center gap-1 text-slate-600 font-medium">
           <MapPin size={13} className="text-orange-600" />
           <span>{order.station}</span>
-          <span className="text-slate-400">· {order.coach}/{order.seat}</span>
+          <span className="text-slate-400">· Coach {order.coach}/{order.seat}</span>
         </div>
       </div>
 
       {/* Concise Dish Summary Card Trigger */}
       <div 
         onClick={() => onOpenDetails(order)}
-        className="bg-[#f8f6f0] hover:bg-[#f1eee4] p-2.5 rounded-lg flex items-center justify-between text-xs cursor-pointer transition-colors"
+        className="bg-[#f8f6f0] hover:bg-[#f1eee4] p-2.5 rounded-lg flex items-center justify-between text-xs cursor-pointer transition-colors space-y-1"
       >
         <div className="truncate pr-2">
           <span className="font-bold text-slate-900 block truncate">
@@ -81,6 +87,11 @@ export const OrderCard: React.FC<OrderCardProps> = ({
           {remainingCount > 0 && (
             <span className="text-[11px] text-slate-500 font-medium block">
               + {remainingCount} more dish{remainingCount > 1 ? 'es' : ''}
+            </span>
+          )}
+          {order.specialInstructions && (
+            <span className="text-[10px] text-amber-800 font-medium italic block truncate">
+              Note: "{order.specialInstructions}"
             </span>
           )}
         </div>
@@ -92,17 +103,17 @@ export const OrderCard: React.FC<OrderCardProps> = ({
       {/* Footer Actions & Bill */}
       <div className="pt-2 flex items-center justify-between gap-2 flex-wrap">
         <div className="flex items-baseline gap-1.5">
-          <span className="text-xs text-slate-500 font-medium">Bill:</span>
+          <span className="text-xs text-slate-500 font-medium">Bill ({order.paymentMethod}):</span>
           <span className="font-mono font-extrabold text-emerald-700 text-base">₹{order.total}</span>
         </div>
         <div className="flex items-center gap-1 flex-wrap">
-          {(['placed', 'preparing', 'out_for_delivery', 'delivered'] as const).map((st) => (
+          {(['placed', 'confirmed', 'preparing', 'ready', 'out_for_delivery', 'delivered'] as const).map((st) => (
             <button
               key={st}
               onClick={() => onUpdateStatus(order.id, st)}
-              className={`px-2 py-1 rounded-md text-[11px] font-semibold transition cursor-pointer ${
+              className={`px-2 py-1 rounded-md text-[10px] font-bold transition cursor-pointer ${
                 order.status === st
-                  ? 'bg-orange-600 text-white shadow-xs'
+                  ? 'bg-orange-600 text-white'
                   : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
               }`}
             >
