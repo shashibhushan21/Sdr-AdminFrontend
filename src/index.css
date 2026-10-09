@@ -38,19 +38,18 @@ body {
 }
 
 @layer components {
-  /* Cards & Containers - White cards on #f8f6f0 canvas with subtle shadow & refined rounded corners */
+  /* Cards & Containers - Clean borderless white cards on #f8f6f0 canvas with soft shadow */
   .admin-card {
     background-color: #ffffff;
     border-radius: 0.5rem; /* 8px consistent corner radius */
     padding: 1.25rem;
     color: #0f172a;
-    border: 1px solid rgba(226, 232, 240, 0.7);
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    border: none;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.2s ease;
   }
   .admin-card:hover {
-    border-color: rgba(203, 213, 225, 0.9);
-    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 6px 18px -2px rgba(0, 0, 0, 0.06);
   }
 
   /* Typography */
@@ -91,6 +90,7 @@ body {
     font-size: 0.8125rem;
     padding: 0.5rem 1.125rem;
     border-radius: 0.375rem; /* 6px - subtle rounded */
+    border: none;
     transition: background-color 0.15s ease, box-shadow 0.15s ease;
     box-shadow: 0 2px 4px rgba(234, 88, 12, 0.15);
   }
@@ -100,35 +100,33 @@ body {
   }
 
   .admin-btn-secondary {
-    background-color: #ffffff;
-    border: 1px solid #cbd5e1;
+    background-color: #f1f5f9;
     color: #334155;
     font-weight: 600;
     font-size: 0.8125rem;
     padding: 0.4375rem 0.875rem;
     border-radius: 0.375rem; /* 6px */
-    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    border: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
   }
   .admin-btn-secondary:hover {
-    background-color: #f8fafc;
-    border-color: #94a3b8;
+    background-color: #e2e8f0;
     color: #0f172a;
   }
 
   /* Inputs */
   .admin-input {
-    background-color: #ffffff;
+    background-color: #f8f6f0;
     border-radius: 0.375rem; /* 6px */
     padding: 0.5rem 0.875rem;
     font-size: 0.8125rem;
     color: #0f172a;
-    border: 1px solid #cbd5e1;
+    border: none;
   }
   .admin-input:focus {
     outline: none;
     background-color: #ffffff;
-    border-color: #ea580c;
-    box-shadow: 0 0 0 2px rgba(234, 88, 12, 0.2);
+    box-shadow: 0 0 0 2px rgba(234, 88, 12, 0.25);
   }
 
   /* Status Badges - Solid 100% Opacity Vibrant Background Colors with Crisp White Text */

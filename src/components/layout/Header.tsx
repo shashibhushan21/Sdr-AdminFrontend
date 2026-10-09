@@ -15,12 +15,12 @@ export const Header: React.FC<HeaderProps> = ({
   setMobileMenuOpen,
 }) => {
   return (
-    <header className="h-16 bg-[#f8f6f0] border-b border-slate-200/80 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-20">
+    <header className="h-16 bg-[#f8f6f0] px-4 sm:px-6 flex items-center justify-between sticky top-0 z-20">
       <div className="flex items-center gap-3">
         {/* Mobile Hamburger Drawer Trigger */}
         <button
           onClick={() => setMobileMenuOpen(true)}
-          className="md:hidden p-2 rounded-md bg-white border border-slate-200/80 hover:bg-slate-50 text-slate-700 transition cursor-pointer"
+          className="md:hidden p-2 rounded-md bg-white hover:bg-slate-100 text-slate-700 transition cursor-pointer shadow-xs"
           aria-label="Open Navigation Menu"
         >
           <Menu size={18} />
@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
             placeholder="Search Order, PNR, Customer..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white text-slate-800 text-xs rounded-md pl-10 pr-3 py-2 border border-slate-200/80 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all placeholder:text-slate-400 font-medium"
+            className="w-full bg-white text-slate-800 text-xs rounded-md pl-10 pr-3 py-2 shadow-xs focus:outline-none focus:ring-2 focus:ring-orange-500/30 transition-all placeholder:text-slate-400 font-medium border-0"
           />
         </div>
       </div>
@@ -47,12 +47,12 @@ export const Header: React.FC<HeaderProps> = ({
         </span>
         <button
           onClick={onRefresh}
-          className="p-2 rounded-md bg-white border border-slate-200/80 hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition cursor-pointer"
+          className="p-2 rounded-md bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition cursor-pointer shadow-xs"
           title="Refresh Data"
         >
           <RefreshCw size={16} />
         </button>
-        <button className="p-2 rounded-md bg-white border border-slate-200/80 hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition cursor-pointer relative">
+        <button className="p-2 rounded-md bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition cursor-pointer relative shadow-xs">
           <Bell size={16} />
           <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-orange-600" />
         </button>

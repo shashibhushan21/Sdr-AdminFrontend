@@ -16,8 +16,8 @@ export const AddVoucherModal: React.FC<AddVoucherModalProps> = ({
 }) => {
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-fadeIn">
-      <div className="bg-white w-full max-w-md rounded-xl p-6 space-y-4 shadow-xl border border-slate-200/80 text-slate-800">
-        <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+      <div className="bg-white w-full max-w-md rounded-xl p-6 space-y-4 shadow-xl text-slate-800">
+        <div className="flex items-center justify-between pb-2">
           <div>
             <h3 className="font-bold text-lg text-slate-900">Create New Voucher</h3>
             <p className="text-xs text-slate-500 font-medium">Add promo codes for train passenger orders</p>

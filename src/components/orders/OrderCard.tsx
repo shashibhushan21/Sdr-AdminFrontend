@@ -47,7 +47,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({
           </span>
           <button
             onClick={() => onOpenDetails(order)}
-            className="p-1.5 rounded-md bg-white border border-slate-200/80 hover:bg-slate-50 text-slate-600 transition cursor-pointer"
+            className="p-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition cursor-pointer"
             title="View Details Popup"
           >
             <Eye size={15} />
@@ -72,7 +72,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({
       {/* Concise Dish Summary Card Trigger */}
       <div 
         onClick={() => onOpenDetails(order)}
-        className="bg-[#f8f6f0] border border-slate-200/60 hover:bg-[#f1eee4] p-2.5 rounded-lg flex items-center justify-between text-xs cursor-pointer transition-colors"
+        className="bg-[#f8f6f0] hover:bg-[#f1eee4] p-2.5 rounded-lg flex items-center justify-between text-xs cursor-pointer transition-colors"
       >
         <div className="truncate pr-2">
           <span className="font-bold text-slate-900 block truncate">
@@ -103,7 +103,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({
               className={`px-2 py-1 rounded-md text-[11px] font-semibold transition cursor-pointer ${
                 order.status === st
                   ? 'bg-orange-600 text-white shadow-xs'
-                  : 'bg-slate-100/90 text-slate-600 hover:text-slate-900 hover:bg-slate-200/80 border border-slate-200/60'
+                  : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
               }`}
             >
               {st === 'out_for_delivery' ? 'Delivery' : st}
