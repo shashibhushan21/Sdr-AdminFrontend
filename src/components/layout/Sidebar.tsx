@@ -48,7 +48,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
             />
             <div className="min-w-0">
               <h1 className="font-bold text-sm text-slate-900 leading-tight truncate">Shripati Dwarkadhish</h1>
-              <p className="text-[11px] font-semibold text-orange-600">Train Food Admin</p>
             </div>
           </div>
 

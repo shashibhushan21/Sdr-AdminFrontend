@@ -106,10 +106,10 @@ export const OrderCard: React.FC<OrderCardProps> = ({
             <button
               key={st}
               onClick={() => onUpdateStatus(order.id, st)}
-              className={`px-2 py-1 rounded-md text-[10px] font-bold transition cursor-pointer ${
+              className={`px-2 py-1 rounded-md text-[10px] font-bold transition-all duration-150 cursor-pointer border-0 ${
                 order.status === st
-                  ? 'bg-orange-600 text-white'
-                  : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
+                  ? 'bg-orange-600 text-white shadow-xs'
+                  : 'bg-[#f8f6f0] text-slate-600 hover:text-orange-600 hover:bg-orange-50'
               }`}
             >
               {st === 'out_for_delivery' ? 'Delivery' : st}

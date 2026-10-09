@@ -130,10 +130,10 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
                     key={step.status}
                     type="button"
                     onClick={() => onUpdateStatus(order.id, step.status as OrderStatus)}
-                    className={`p-2 rounded-lg text-left transition cursor-pointer border ${
+                    className={`p-2.5 rounded-lg text-left transition-all duration-150 cursor-pointer border-0 ${
                       isActive
-                        ? 'bg-orange-600 text-white border-orange-600 shadow-xs'
-                        : 'bg-white text-slate-700 border-slate-200 hover:border-orange-300'
+                        ? 'bg-orange-600 text-white shadow-md'
+                        : 'bg-white text-slate-700 hover:bg-orange-50 hover:text-orange-900 shadow-2xs'
                     }`}
                   >
                     <span className="font-bold block text-[11px]">{step.title}</span>
@@ -149,15 +149,15 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
           {/* Fulfillment Status Action Buttons */}
           <div className="space-y-2 pt-1">
             <span className="text-xs font-semibold text-slate-700 block">Quick Status Action</span>
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-1.5 flex-wrap">
               {(['placed', 'confirmed', 'preparing', 'ready', 'out_for_delivery', 'delivered', 'cancelled'] as const).map((st) => (
                 <button
                   key={st}
                   onClick={() => onUpdateStatus(order.id, st)}
-                  className={`px-3 py-1.5 rounded-md text-xs font-bold transition cursor-pointer text-center ${
+                  className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all duration-150 cursor-pointer border-0 ${
                     order.status === st
-                      ? 'bg-orange-600 text-white'
-                      : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
+                      ? 'bg-orange-600 text-white shadow-xs'
+                      : 'bg-[#f8f6f0] text-slate-600 hover:text-orange-600 hover:bg-orange-50'
                   }`}
                 >
                   {st === 'out_for_delivery' ? 'Delivery' : st.replace(/_/g, ' ')}

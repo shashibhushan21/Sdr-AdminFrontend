@@ -27,14 +27,14 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
 
         {/* Search Input */}
-        <div className="relative w-48 sm:w-80">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
+        <div className="relative flex-1 max-w-[190px] sm:w-80">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
           <input
             type="text"
-            placeholder="Search Order, PNR, Customer..."
+            placeholder="Search Order, PNR..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white text-slate-800 text-xs rounded-md pl-10 pr-3 py-2 shadow-xs focus:outline-none focus:ring-2 focus:ring-orange-500/30 transition-all placeholder:text-slate-400 font-medium border-0"
+            className="w-full bg-white text-slate-800 text-xs rounded-md pl-8 pr-2.5 py-1.5 shadow-xs focus:outline-none focus:ring-2 focus:ring-orange-500/30 transition-all placeholder:text-slate-400 font-medium border-0"
           />
         </div>
       </div>
