@@ -23,23 +23,12 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
   onOpenDetails,
 }) => {
   return (
-    <div className="space-y-4">
-      {/* Title Card */}
-      <div className="admin-card border-0">
-        <div className="flex items-center gap-2">
-          <h2 className="admin-title-md">Live Food Orders Board</h2>
-          <span className="bg-orange-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-md shadow-xs">
-            {filteredOrders.length} Orders
-          </span>
-        </div>
-        <p className="admin-subtitle">Update kitchen preparation and train seat food delivery status</p>
-      </div>
-
-      {/* Sticky Status Filters & View Switcher Bar */}
-      <div className="sticky top-0 z-30 bg-[#f8f6f0] py-1 -mt-2">
-        <div className="admin-card flex items-center justify-between gap-3 border-0 shadow-xs p-2.5 sm:p-3.5 bg-white">
+    <div className="space-y-3 sm:space-y-4">
+      {/* Sticky Status Filters & View Switcher Bar - Flush under Header */}
+      <div className="sticky top-0 z-10 bg-[#f8f6f0] -mx-3 px-3 py-1.5 sm:-mx-4 sm:px-4 sm:py-2 border-b border-slate-200/60 shadow-xs">
+        <div className="flex items-center justify-between gap-2.5 sm:gap-3">
           {/* Status Filters Pills */}
-          <div className="flex items-center gap-1 bg-[#f8f6f0] p-1 rounded-md max-w-full overflow-x-auto">
+          <div className="flex items-center gap-1 bg-white p-1 rounded-lg shadow-xs border border-slate-200/60 max-w-full overflow-x-auto">
             {['all', 'placed', 'confirmed', 'preparing', 'ready', 'out_for_delivery', 'delivered'].map((st) => (
               <button
                 key={st}
@@ -47,7 +36,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
                 className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                   statusFilter === st
                     ? 'bg-orange-600 text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`}
               >
                 {st === 'all' ? 'All Orders' : st.replace(/_/g, ' ')}
@@ -56,27 +45,38 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
           </div>
 
           {/* View Mode Toggle */}
-          <div className="flex items-center gap-1 bg-[#f8f6f0] p-1 rounded-md shrink-0">
+          <div className="flex items-center gap-1 bg-white p-1 rounded-lg shadow-xs border border-slate-200/60 shrink-0">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-1.5 rounded-md transition-all cursor-pointer ${
+              className={`p-1 rounded-md transition-all cursor-pointer ${
                 viewMode === 'grid' ? 'bg-orange-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
               title="Grid View"
             >
-              <Grid size={16} />
+              <Grid size={15} />
             </button>
             <button
               onClick={() => setViewMode('table')}
-              className={`p-1.5 rounded-md transition-all cursor-pointer ${
+              className={`p-1 rounded-md transition-all cursor-pointer ${
                 viewMode === 'table' ? 'bg-orange-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
               title="Table View"
             >
-              <List size={16} />
+              <List size={15} />
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Board Info Title */}
+      <div className="admin-card border-0 py-3 px-4 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <h2 className="admin-title-md">Live Food Orders Board</h2>
+          <span className="bg-orange-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-md shadow-xs">
+            {filteredOrders.length} Orders
+          </span>
+        </div>
+        <p className="admin-subtitle hidden sm:block">Update kitchen preparation and train seat food delivery status</p>
       </div>
 
       {/* GRID VIEW */}

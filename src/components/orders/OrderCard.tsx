@@ -89,11 +89,6 @@ export const OrderCard: React.FC<OrderCardProps> = ({
               + {remainingCount} more dish{remainingCount > 1 ? 'es' : ''}
             </span>
           )}
-          {order.specialInstructions && (
-            <span className="text-[10px] text-amber-800 font-medium italic block truncate">
-              Note: "{order.specialInstructions}"
-            </span>
-          )}
         </div>
         <span className="text-orange-600 font-semibold text-xs shrink-0 flex items-center gap-0.5">
           Details <ChevronRight size={14} />
