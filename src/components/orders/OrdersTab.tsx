@@ -29,7 +29,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
         <div>
           <div className="flex items-center gap-2">
             <h2 className="admin-title-md">Live Food Orders Board</h2>
-            <span className="bg-orange-100 text-orange-700 text-xs font-bold px-2.5 py-0.5 rounded-full">
+            <span className="bg-orange-100 border border-orange-200/60 text-orange-700 text-xs font-bold px-2.5 py-0.5 rounded-md">
               {filteredOrders.length} Orders
             </span>
           </div>
@@ -38,7 +38,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
 
         <div className="flex items-center gap-3 flex-wrap w-full md:w-auto">
           {/* Status Filters Pills */}
-          <div className="flex items-center gap-1 bg-[#f8f6f0] p-1 rounded-lg max-w-full overflow-x-auto">
+          <div className="flex items-center gap-1 bg-[#f8f6f0] border border-slate-200/80 p-1 rounded-md max-w-full overflow-x-auto">
             {['all', 'placed', 'preparing', 'out_for_delivery', 'delivered'].map((st) => (
               <button
                 key={st}
@@ -55,7 +55,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
           </div>
 
           {/* View Mode Toggle */}
-          <div className="flex items-center gap-1 bg-[#f8f6f0] p-1 rounded-lg shrink-0">
+          <div className="flex items-center gap-1 bg-[#f8f6f0] border border-slate-200/80 p-1 rounded-md shrink-0">
             <button
               onClick={() => setViewMode('grid')}
               className={`p-1.5 rounded-md transition-all cursor-pointer ${

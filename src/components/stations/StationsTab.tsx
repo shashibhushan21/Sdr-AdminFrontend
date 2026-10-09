@@ -21,7 +21,7 @@ export const StationsTab: React.FC = () => {
         {stations.map((st, i) => (
           <div key={i} className="admin-card space-y-3 border-0 transition-shadow duration-200 hover:shadow-md">
             <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-sm text-orange-700 bg-orange-50 px-2.5 py-1 rounded-lg">
+              <span className="font-mono font-bold text-sm text-orange-700 bg-orange-50 border border-orange-200/60 px-2.5 py-1 rounded-md">
                 {st.code}
               </span>
               <span className="admin-badge-delivered">

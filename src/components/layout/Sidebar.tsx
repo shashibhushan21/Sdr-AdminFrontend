@@ -39,16 +39,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       {/* DESKTOP SIDEBAR */}
-      <aside className="hidden md:flex w-64 bg-white flex-col justify-between shrink-0 sticky top-0 h-screen z-30 shadow-sm">
+      <aside className="hidden md:flex w-64 bg-[#f8f6f0] border-r border-slate-200/80 flex-col justify-between shrink-0 sticky top-0 h-screen z-30">
         <div>
           {/* Brand Header */}
-          <div className="p-5 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-orange-600 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-sm shadow-orange-600/30">
-              SD
-            </div>
+          <div className="p-4 flex items-center gap-3 border-b border-slate-200/60 mb-2">
+            <img 
+              src="/logo.jpg" 
+              alt="Shripati Dwarkadhish Logo" 
+              className="w-11 h-11 object-contain rounded-full bg-white shadow-xs shrink-0"
+            />
             <div className="min-w-0">
               <h1 className="font-bold text-sm text-slate-900 leading-tight truncate">Shripati Dwarkadhish</h1>
-              <p className="text-xs font-semibold text-orange-600">Train Food Admin</p>
+              <p className="text-[11px] font-semibold text-orange-600">Train Food Admin</p>
             </div>
           </div>
 
@@ -61,10 +63,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-xs font-semibold transition-all duration-150 cursor-pointer ${
                     isActive
-                      ? 'bg-orange-600 text-white shadow-sm shadow-orange-600/20'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
+                      ? 'bg-orange-600 text-white shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -73,7 +75,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   </div>
                   {item.count ? (
                     <span
-                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                      className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${
                         isActive ? 'bg-white/20 text-white' : 'bg-orange-100 text-orange-700'
                       }`}
                     >
@@ -88,8 +90,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* User Hub Badge */}
         <div className="p-4">
-          <div className="bg-[#f8f6f0] rounded-xl p-3 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
+          <div className="bg-white/90 border border-slate-200/80 rounded-lg p-3 flex items-center gap-3 shadow-2xs">
+            <div className="w-8 h-8 rounded-md bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
               AG
             </div>
             <div className="min-w-0">
@@ -105,18 +107,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* MOBILE SIDEBAR DRAWER POPUP */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 md:hidden bg-slate-900/60 backdrop-blur-xs flex">
-          <div className="w-64 bg-white h-full flex flex-col justify-between p-4 shadow-xl animate-in slide-in-from-left duration-200">
+          <div className="w-64 bg-[#f8f6f0] border-r border-slate-200/80 h-full flex flex-col justify-between p-4 shadow-xl animate-in slide-in-from-left duration-200">
             <div>
-              <div className="flex items-center justify-between pb-4">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200/60">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-orange-600 text-white flex items-center justify-center font-bold text-xs">
-                    SD
-                  </div>
+                  <img 
+                    src="/logo.jpg" 
+                    alt="Shripati Dwarkadhish Logo" 
+                    className="w-9 h-9 object-contain rounded-full bg-white shadow-xs"
+                  />
                   <span className="font-bold text-sm text-slate-900">SDR Admin</span>
                 </div>
                 <button 
                   onClick={() => setMobileMenuOpen(false)} 
-                  className="text-slate-400 hover:text-slate-700 bg-slate-100 p-1.5 rounded-lg transition cursor-pointer"
+                  className="text-slate-400 hover:text-slate-700 bg-white border border-slate-200/80 p-1.5 rounded-md transition cursor-pointer"
                 >
                   <X size={18} />
                 </button>
@@ -133,8 +137,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         setActiveTab(item.id);
                         setMobileMenuOpen(false);
                       }}
-                      className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold cursor-pointer ${
-                        isActive ? 'bg-orange-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'
+                      className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-xs font-semibold cursor-pointer ${
+                        isActive ? 'bg-orange-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -142,7 +146,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         <span>{item.label}</span>
                       </div>
                       {item.count ? (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-orange-700">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-orange-100 text-orange-700">
                           {item.count}
                         </span>
                       ) : null}
@@ -152,7 +156,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </nav>
             </div>
 
-            <div className="bg-[#f8f6f0] rounded-xl p-3 text-xs font-semibold text-slate-700">
+            <div className="bg-white/90 border border-slate-200/80 rounded-lg p-3 text-xs font-semibold text-slate-700">
               Agra Hub Connected
             </div>
           </div>

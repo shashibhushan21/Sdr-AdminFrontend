@@ -20,7 +20,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{title}</span>
         <span
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
+          className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold ${
             isPositive
               ? 'bg-emerald-50 text-emerald-700'
               : 'bg-orange-50 text-orange-700'

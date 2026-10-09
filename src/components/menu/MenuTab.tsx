@@ -40,7 +40,7 @@ export const MenuTab: React.FC<MenuTabProps> = ({
                 </div>
                 <span className="text-xs text-slate-500 font-medium block pt-0.5">{item.category}</span>
               </div>
-              <span className="font-mono font-bold text-sm text-orange-700 bg-orange-50 px-2.5 py-1 rounded-lg">
+              <span className="font-mono font-bold text-sm text-orange-700 bg-orange-50 border border-orange-200/60 px-2.5 py-1 rounded-md">
                 ₹{item.price}
               </span>
             </div>
@@ -54,10 +54,10 @@ export const MenuTab: React.FC<MenuTabProps> = ({
 
               <button
                 onClick={() => onToggleAvailability(item.id)}
-                className={`px-3 py-1 rounded-full text-xs font-semibold transition cursor-pointer ${
+                className={`px-2.5 py-1 rounded-md text-xs font-semibold transition cursor-pointer ${
                   item.isAvailable
-                    ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                    : 'bg-red-50 text-red-700 hover:bg-red-100'
+                    ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200/60'
+                    : 'bg-red-50 text-red-700 hover:bg-red-100 border border-red-200/60'
                 }`}
               >
                 {item.isAvailable ? 'In Stock' : 'Out of Stock'}

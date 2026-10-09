@@ -15,12 +15,12 @@ export const Header: React.FC<HeaderProps> = ({
   setMobileMenuOpen,
 }) => {
   return (
-    <header className="h-16 bg-white px-4 sm:px-6 flex items-center justify-between sticky top-0 z-20 shadow-xs">
+    <header className="h-16 bg-[#f8f6f0] border-b border-slate-200/80 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-20">
       <div className="flex items-center gap-3">
         {/* Mobile Hamburger Drawer Trigger */}
         <button
           onClick={() => setMobileMenuOpen(true)}
-          className="md:hidden p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
+          className="md:hidden p-2 rounded-md bg-white border border-slate-200/80 hover:bg-slate-50 text-slate-700 transition cursor-pointer"
           aria-label="Open Navigation Menu"
         >
           <Menu size={18} />
@@ -34,25 +34,25 @@ export const Header: React.FC<HeaderProps> = ({
             placeholder="Search Order, PNR, Customer..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-[#f8f6f0] text-slate-800 text-xs rounded-xl pl-10 pr-3 py-2 focus:outline-none focus:bg-white focus:ring-2 focus:ring-orange-500/50 transition-all placeholder:text-slate-400 font-medium border-0"
+            className="w-full bg-white text-slate-800 text-xs rounded-md pl-10 pr-3 py-2 border border-slate-200/80 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all placeholder:text-slate-400 font-medium"
           />
         </div>
       </div>
 
       <div className="flex items-center gap-2.5">
-        <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">
+        <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200/70 text-emerald-700 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           <ShieldCheck size={14} className="text-emerald-600" />
           Live Sync Active
         </span>
         <button
           onClick={onRefresh}
-          className="p-2 rounded-xl bg-[#f8f6f0] hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition cursor-pointer"
+          className="p-2 rounded-md bg-white border border-slate-200/80 hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition cursor-pointer"
           title="Refresh Data"
         >
           <RefreshCw size={16} />
         </button>
-        <button className="p-2 rounded-xl bg-[#f8f6f0] hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition cursor-pointer relative">
+        <button className="p-2 rounded-md bg-white border border-slate-200/80 hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition cursor-pointer relative">
           <Bell size={16} />
           <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-orange-600" />
         </button>
