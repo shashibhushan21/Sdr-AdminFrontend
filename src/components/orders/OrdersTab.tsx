@@ -29,7 +29,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({
         <div>
           <div className="flex items-center gap-2">
             <h2 className="admin-title-md">Live Food Orders Board</h2>
-            <span className="bg-orange-100 border border-orange-200/60 text-orange-700 text-xs font-bold px-2.5 py-0.5 rounded-md">
+            <span className="bg-orange-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-md shadow-xs">
               {filteredOrders.length} Orders
             </span>
           </div>
