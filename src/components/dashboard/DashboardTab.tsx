@@ -22,25 +22,21 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
         <MetricCard
           title="Today's Sales"
           value="₹42,850"
-          trend="+18.4%"
           desc="vs yesterday"
         />
         <MetricCard
           title="Total Orders"
           value="128"
-          trend="+14.2%"
           desc="34 live in kitchen"
         />
         <MetricCard
           title="Agra Cantt"
           value="18 Trains"
-          trend="AGC Station"
           desc="Platform delivery"
         />
         <MetricCard
           title="Avg Delivery"
           value="14 Mins"
-          trend="-2 mins"
           desc="Seat delivery time"
         />
       </div>
